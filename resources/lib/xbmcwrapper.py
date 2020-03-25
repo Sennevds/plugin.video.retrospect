@@ -284,11 +284,11 @@ class XbmcWrapper:
         return ok
 
     @staticmethod
-    def show_dialog(title, lines):
+    def show_dialog(title, message):
         """ Shows a dialog box with title and text
 
-        :param str|None title:          The title of the box
-        :param list[str]|str lines:     The lines to display.
+        :param str|None title:      The title of the box
+        :param str message:         The lines to display.
 
         :return: True for OK, False for cancelled.
         :rtype: bool
@@ -304,18 +304,7 @@ class XbmcWrapper:
         else:
             header = "%s - %s" % (Config.appName, title)
 
-        # TODO: Deprecated
-        if len(lines) == 0:
-            ok = msg_box.ok(header, "")
-        elif isinstance(lines, basestring):
-            # it was just a string, no list or tuple
-            ok = msg_box.ok(header, lines)
-        elif len(lines) == 1:
-            ok = msg_box.ok(header, lines[0])
-        elif len(lines) == 2:
-            ok = msg_box.ok(header, lines[0], lines[1])
-        else:
-            ok = msg_box.ok(header, lines[0], lines[1], lines[2])
+        ok = msg_box.ok(header, message or "")
         return ok
 
     @staticmethod
