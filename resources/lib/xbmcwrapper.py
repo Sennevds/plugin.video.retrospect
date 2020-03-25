@@ -6,7 +6,7 @@ import xbmcgui
 import xbmc
 import xbmcaddon
 
-from resources.lib.backtothefuture import basestring, unichr
+from resources.lib.backtothefuture import unichr
 from resources.lib.helpers.languagehelper import LanguageHelper
 from resources.lib.retroconfig import Config
 from resources.lib.locker import LockWithDialog
@@ -254,11 +254,11 @@ class XbmcWrapper:
         return input_dialog.select(title, options)
 
     @staticmethod
-    def show_yes_no(title, lines):
+    def show_yes_no(title, message):
         """ Shows a dialog yes/no box with title and text
 
-        :param str title:           The title of the box.
-        :param list[str] lines:     The lines to display.
+        :param str title:       The title of the box.
+        :param str message:     The message to display.
 
         :return: Ok or not OK (boolean)
         :rtype: bool
@@ -274,13 +274,7 @@ class XbmcWrapper:
         else:
             header = "%s - %s" % (Config.appName, title)
 
-        if len(lines) == 0:
-            ok = msg_box.yesno(header, "")
-        elif isinstance(lines, basestring):
-            # it was just a string, no list or tuple
-            ok = msg_box.yesno(header, lines)
-        else:
-            ok = False
+        ok = msg_box.yesno(header, message or "")
         return ok
 
     @staticmethod
