@@ -23,6 +23,7 @@ class XbmcDialogProgressWrapper(object):
         """
 
         self.Title = title
+        # TODO: deprecated line2, line2
         self.Line1 = line1
         self.Line2 = line2
         self.progressBarDialog = xbmcgui.DialogProgress()
@@ -49,6 +50,7 @@ class XbmcDialogProgressWrapper(object):
         """
 
         if not completed:
+            # TODO: deprecated line2, line2
             # noinspection PyTypeChecker
             self.progressBarDialog.update(int(perc), self.Line1, self.Line2, status)
         else:
@@ -306,6 +308,7 @@ class XbmcWrapper:
         else:
             header = "%s - %s" % (Config.appName, title)
 
+        # TODO: Deprecated
         if len(lines) == 0:
             ok = msg_box.ok(header, "")
         elif isinstance(lines, basestring):
