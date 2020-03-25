@@ -13,21 +13,18 @@ from resources.lib.locker import LockWithDialog
 
 
 class XbmcDialogProgressWrapper(object):
-    def __init__(self, title, line1, line2=""):
+    def __init__(self, title, message):
         """ Initialises a XbmcDialogProgressWrapper that wraps an Kodi DialogProgress object.
 
         :param str title: Title of it
-        :param str line1: The first line to show
-        :param str line2: The second line to show
+        :param str message: The first line to show
 
         """
 
-        self.Title = title
-        # TODO: deprecated line2, line2
-        self.Line1 = line1
-        self.Line2 = line2
+        self.title = title
+        self.message = message
         self.progressBarDialog = xbmcgui.DialogProgress()
-        self.progressBarDialog.create(title, line1)
+        self.progressBarDialog.create(title, message)
 
     def __call__(self, *args):
         return self.progress_update(*args)
@@ -50,9 +47,8 @@ class XbmcDialogProgressWrapper(object):
         """
 
         if not completed:
-            # TODO: deprecated line2, line2
-            # noinspection PyTypeChecker
-            self.progressBarDialog.update(int(perc), self.Line1, self.Line2, status)
+            message = "{}\n\n{}".format(self.message, status)
+            self.progressBarDialog.update(int(perc), message)
         else:
             self.progressBarDialog.close()
 
